@@ -11,19 +11,13 @@ CREATE TABLE users (
   username TEXT
 );
 
-CREATE TABLE rooms (
-  id INT PRIMARY KEY,
-  roomname TEXT
-);
-
 CREATE TABLE messages (
   id INT PRIMARY KEY,
   username INT,
-  roomname INT,
-  message_text TEXT,
-  time_stamp TIMESTAMP,
-  FOREIGN KEY (username) REFERENCES users(id),
-  FOREIGN KEY (roomname) REFERENCES rooms(id)
+  roomname TEXT,
+  message TEXT,
+  -- time_stamp TIMESTAMP
+  FOREIGN KEY (username) REFERENCES users(id)
 );
 
 /*  Execute this file from the command line by typing:
