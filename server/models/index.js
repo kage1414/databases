@@ -22,11 +22,10 @@ module.exports = {
           callback(null, results);
         }
       });
-    } // a function which can be used to insert a message into the database
+    }
   },
 
   users: {
-    // Ditto as above.
     get: function (callback) {
       db.database.query('SELECT * from users', (error, results) => {
         if (error) {
