@@ -4,14 +4,18 @@ var parser = require('body-parser');
 module.exports = {
   messages: {
     get: function (req, res) {
-      let modelsResponse = models.messages.get();
-      res.send(modelsResponse);
+      models.messages.get((error, results) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(results);
+        }
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
       models.messages.post(req.body, (error, results) => {
         if (error) {
           res.send(error);
-          console.log('Error: ', error);
         } else {
           res.send(results);
         }
@@ -22,12 +26,22 @@ module.exports = {
   users: {
     // Ditto as above
     get: function (req, res) {
-      models.users.get();
-      res.send('');
+      models.users.get((error, results) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(results);
+        }
+      });
     },
     post: function (req, res) {
-      models.users.post();
-      res.send('');
+      models.users.post(req.body, (error, results) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send(results);
+        }
+      });
     }
   }
 };
