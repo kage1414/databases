@@ -15,7 +15,7 @@ module.exports.database.connect(function(err) {
     return;
   }
  
-  console.log('connected as id ' + connection.threadId);
+  console.log('connected as id ' + module.exports.database.threadId);
 });
 
 
