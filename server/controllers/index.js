@@ -20,7 +20,7 @@ module.exports = {
     get: function (req, res) {},
     post: function (req, res) {
 
-      console.log(parser.json());
+      console.log(req.body);
 
       // req.on('end', () => {
       //   console.log
