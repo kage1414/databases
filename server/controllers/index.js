@@ -1,5 +1,20 @@
 var models = require('../models');
 var parser = require('body-parser');
+var Sequelize = require('sequelize');
+var db = new Sequelize('chat', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
+
+var User = db.define('users', {
+  username: Sequelize.TEXT
+});
+
+var Message = db.define('messages', {
+  usernameid: Sequelize.INTEGER,
+  roomname: Sequelize.TEXT,
+  message: Sequelize.TEXT
+});
 
 module.exports = {
   messages: {
