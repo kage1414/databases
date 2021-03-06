@@ -87,4 +87,39 @@ describe('Persistent Node Chat Server', function() {
       });
     });
   });
+
+  it('Should output all users from the DB', function(done) {
+    dbConnection = mysql.createConnection({
+      user: 'student',
+      password: 'student',
+      database: 'chat'
+    });
+    dbConnection.connect();
+
+    var tablename = 'users'; // TODO: fill this out
+
+    /* Empty the db table before each test so that multiple tests
+     * (or repeated runs of the tests) won't screw each other up: */
+    dbConnection.query('delete from ' + tablename, done);
+    // Let's insert a message into the db
+    var queryString = 'INSERT INTO users (username) VALUES (?)';
+    var queryArgs = ['Jimmy'];
+    // TODO - The exact query string and query args to use
+    // here depend on the schema you design, so I'll leave
+    // them up to you. */
+
+    dbConnection.query(queryString, queryArgs, function(err) {
+      if (err) { throw err; }
+
+      // Now query the Node chat server and see if it returns
+      // the message we just inserted:
+      request('http://127.0.0.1:3000/classes/users', function(error, response, body) {
+        console.log('body', body);
+        var messageLog = JSON.parse(body);
+        expect(messageLog[0].username).to.equal('Jimmy');
+        done();
+      });
+    });
+  });
+
 });
