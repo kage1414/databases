@@ -9,13 +9,15 @@ USE chat;
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
   username TEXT NOT NULL,
+  -- createdAt TIMESTAMP NULL,
+  -- updatedAt TIMESTAMP NULL,
   PRIMARY KEY (id)
   -- UNIQUE INDEX (username)
 );
 
 CREATE TABLE messages (
   id INT NOT NULL AUTO_INCREMENT,
-  usernameid INT NOT NULL,
+  username INT NOT NULL,
   roomname TEXT NOT NULL,
   message TEXT,
   PRIMARY KEY (id),
