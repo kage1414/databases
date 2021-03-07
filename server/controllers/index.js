@@ -30,7 +30,7 @@ module.exports = {
           });
         })
         .then((values) => {
-          console.log('Value');
+
           var results = values.map((idx) => {
             return idx.dataValues;
           });
@@ -53,8 +53,23 @@ module.exports = {
             }
           });
         })
+        .then((results) => {
+          if (results.length === 0) {
+            return User.create({username: req.body.username})
+              .then(() => {
+                return User.findAll({
+                  where: {
+                    username: req.body.username
+                  }
+                });
+              });
+          } else {
+            return results;
+          }
+        })
         .then((user) => {
-          let [usernameVal, messageVal, roomnameVal] = [user[0].dataValues.id, req.body.message, req.body.roomname];
+
+          let [usernameVal, messageVal, roomnameVal] = [user[0].id, req.body.message, req.body.roomname];
           let vals = {
             username: usernameVal,
             message: messageVal,
@@ -85,9 +100,6 @@ module.exports = {
             return idx.dataValues;
           });
           res.send(results);
-        })
-        .then(() => {
-          db.close();
         })
         .catch(function(err) {
           console.error(err);
