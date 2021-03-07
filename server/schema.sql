@@ -7,16 +7,20 @@ USE chat;
 /* Create other tables and define schemas for them here! */
 
 CREATE TABLE users (
-  id INT PRIMARY KEY,
-  username TEXT
+  id INT NOT NULL AUTO_INCREMENT,
+  username TEXT NOT NULL,
+  -- createdAt TIMESTAMP NULL,
+  -- updatedAt TIMESTAMP NULL,
+  PRIMARY KEY (id)
+  -- UNIQUE INDEX (username)
 );
 
 CREATE TABLE messages (
-  id INT PRIMARY KEY,
-  username INT,
-  roomname TEXT,
+  id INT NOT NULL AUTO_INCREMENT,
+  username INT NOT NULL,
+  roomname TEXT NOT NULL,
   message TEXT,
-  -- time_stamp TIMESTAMP
+  PRIMARY KEY (id),
   FOREIGN KEY (username) REFERENCES users(id)
 );
 
