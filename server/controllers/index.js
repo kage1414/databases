@@ -36,12 +36,12 @@ module.exports = {
           });
           res.send(results);
         })
-        .then(() => {
-          db.close();
-        })
+        // .then(() => {
+        //   db.close();
+        // })
         .catch( (err) => {
           console.error(err);
-          db.close();
+          // db.close();
         });
     },
     post: (req, res) => {
@@ -82,7 +82,7 @@ module.exports = {
         })
         .catch(function(err) {
           console.error(err);
-          db.close();
+          // db.close();
         });
     }
   },
@@ -103,7 +103,7 @@ module.exports = {
         })
         .catch(function(err) {
           console.error(err);
-          db.close();
+          // db.close();
         });
     },
     post: (req, res) => {
@@ -116,7 +116,7 @@ module.exports = {
         })
         .catch(function(err) {
           console.error(err);
-          db.close();
+          // db.close();
         });
     },
   }

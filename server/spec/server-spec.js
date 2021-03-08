@@ -94,7 +94,7 @@ describe('Persistent Node Chat Server', function() {
 
     /* Empty the db table before each test so that multiple tests
      * (or repeated runs of the tests) won't screw each other up: */
-    dbConnection.query('delete from ' + tablename, done);
+    dbConnection.query('delete from ' + tablename);
     // Let's insert a message into the db
     var queryString = 'INSERT INTO users (username) VALUES (?)';
     var queryArgs = ['Jimmy'];
