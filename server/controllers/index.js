@@ -1,4 +1,5 @@
 var models = require('../models');
+var _ = require('lodash');
 var parser = require('body-parser');
 var Sequelize = require('sequelize');
 var db = new Sequelize('chat', 'root', '', {
@@ -108,11 +109,24 @@ module.exports = {
     },
     post: (req, res) => {
       User.sync()
-        .then(function() {
-          return User.create(req.body);
-        })
         .then(() => {
-          res.send('');
+          return User.findAll({
+            where: {
+              username: req.body.username
+            }
+          });
+        })
+        .then((result) => {
+
+          if (result.length > 0) {
+            return 'User exists in database\n';
+          } else {
+            User.create(req.body);
+            return 'User added\n';
+          }
+        })
+        .then((string) => {
+          res.send(string);
         })
         .catch(function(err) {
           console.error(err);
